@@ -56,6 +56,10 @@ const fetchNoticeDetailById = async (id) => {
 };
 
 const addNotice = async (payload) => {
+  if (!payload.description || payload.description.trim() === "") {
+    throw new ApiError(400, "Description is required");
+  }
+
   const affectedRow = await addNewNotice(payload);
   if (affectedRow <= 0) {
     throw new ApiError(500, "Unable to add new notice");
@@ -65,6 +69,10 @@ const addNotice = async (payload) => {
 };
 
 const updateNotice = async (payload) => {
+  if (!payload.description || payload.description.trim() === "") {
+    throw new ApiError(400, "Description is required");
+  }
+
   const affectedRow = await updateNoticeById(payload);
   if (affectedRow <= 0) {
     throw new ApiError(500, "Unable to update notice");
