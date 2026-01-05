@@ -37,6 +37,9 @@ describe('Notice Management API', () => {
         server = app.listen(0);
         agent = request.agent(server);
 
+        // Mock console.error to suppress expected API errors
+        jest.spyOn(console, 'error').mockImplementation(() => { });
+
         // Login to get token
         const res = await agent
             .post('/api/v1/auth/login')
@@ -57,6 +60,7 @@ describe('Notice Management API', () => {
     afterAll(async () => {
         await new Promise(resolve => server.close(resolve));
         await db.end();
+        jest.restoreAllMocks();
     });
 
     test('POST /api/v1/notices - Create a notice with description', async () => {

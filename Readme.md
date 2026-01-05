@@ -36,7 +36,15 @@ Files Created/Modified:
 students-service.js
 students-controller.js
 sudents-router.js
+notices-service.js
 students.test.js
+notices.test.js
 package.json (added test command)
 (backend/src/cookie.js - env secure cookies)
 (backend/curl_test_students.sh - all CRUD operations defined in students.test.js using curl)
+
+
+Issue Notice Description Not Saving:
+Backend Added Validation: Modified notices-service.js  to enforce description presence in both addNotice  and  updateNotice  functions.
+
+Improved Error Handling: Now returns a 400 Bad Request with message "Description is required" instead of a 500 Internal Server Error (Database Error) when description is missing.
