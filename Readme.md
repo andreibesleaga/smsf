@@ -1,7 +1,9 @@
 Student Management System Fixes
 
+
 Overview
 Implemented the missing features for the Backend Developer Challenge and fixed the bug for the Frontend Developer Challenge.
+This project is licensed under the MIT License.
 
 Changes
 1. Frontend: Fix "Add Notice" Page
@@ -30,12 +32,11 @@ Updating a student
 Deleting a student
 
 Files Created/Modified:
-add-notice-page.tsx
-notice-form.tsx
+(add-notice-page.tsx, notice-form.tsx - frontend fix)
 students-service.js
 students-controller.js
 sudents-router.js
 students.test.js
-package.json
+package.json (added test command)
 (backend/src/cookie.js - env secure cookies)
 (backend/curl_test_students.sh - all CRUD operations defined in students.test.js using curl)
