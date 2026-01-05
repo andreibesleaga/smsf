@@ -48,3 +48,9 @@ Issue Notice Description Not Saving:
 Backend Added Validation: Modified notices-service.js  to enforce description presence in both addNotice  and  updateNotice  functions.
 
 Improved Error Handling: Now returns a 400 Bad Request with message "Description is required" instead of a 500 Internal Server Error (Database Error) when description is missing.
+
+
+Added limits and pagination to students APIs.
+Added requests validation (and consistent error handling) to students APIs.
+Added DB Indexes to tables.sql and DB connection pooling in settings.
+Added security wrappers for the server (rate-limit, helmet).

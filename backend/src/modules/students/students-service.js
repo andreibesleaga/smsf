@@ -10,12 +10,28 @@ const checkStudentId = async (id) => {
 }
 
 const getAllStudents = async (payload) => {
-    const students = await findAllStudents(payload);
-    if (students.length <= 0) {
-        throw new ApiError(404, "Students not found");
+    const { page = 1, limit = 10, ...filters } = payload;
+    const offset = (page - 1) * limit;
+
+    const students = await findAllStudents({ ...filters, limit, offset });
+
+    let total = 0;
+    if (students.length > 0) {
+        total = parseInt(students[0].totalCount, 10);
+        students.forEach(s => delete s.totalCount);
     }
 
-    return students;
+    const totalPages = Math.ceil(total / limit);
+
+    return {
+        data: students,
+        meta: {
+            total,
+            page,
+            limit,
+            totalPages
+        }
+    };
 }
 
 const getStudentDetail = async (id) => {

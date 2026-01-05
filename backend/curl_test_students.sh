@@ -65,11 +65,11 @@ cat create_response.json
 echo ""
 
 echo -e "\n=== 3. Listing Students to get ID ==="
-curl -s -b $COOKIE_FILE -X GET "$BASE_URL/students" \
+curl -s -b $COOKIE_FILE -X GET "$BASE_URL/students?name=Test%20Student&limit=100" \
   -H "x-csrf-token: $CSRF_TOKEN" > list_response.json
 
 # Use jq to extract ID of student with our email
-STUDENT_ID=$(jq -r ".students[] | select(.email == \"$EMAIL\") | .id" list_response.json)
+STUDENT_ID=$(jq -r ".data[] | select(.email == \"$EMAIL\") | .id" list_response.json)
 
 if [ -z "$STUDENT_ID" ] || [ "$STUDENT_ID" == "null" ]; then
     echo "Failed to find created student ID."
@@ -91,7 +91,7 @@ echo -e "\n=== 5. Update Student ==="
 cat <<EOF > update_payload.json
 {
     "name": "Test Student Updated",
-    "email": "$EMAIL",
+    "email": "updated.$EMAIL",
     "gender": "Male",
     "dob": "2010-01-01",
     "phone": "1234567890",

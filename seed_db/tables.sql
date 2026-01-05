@@ -174,6 +174,11 @@ CREATE TABLE user_leave_policy (
     UNIQUE (user_id, leave_policy_id)
 );
 
+-- Add indexes for common queries
+CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_user_profiles_class ON user_profiles(class_name);
+CREATE INDEX idx_notices_status ON notices(status);
+CREATE INDEX idx_user_leaves_user_id ON user_leaves(user_id);
 
 -- functions
 DROP FUNCTION IF EXISTS staff_add_update(JSONB);

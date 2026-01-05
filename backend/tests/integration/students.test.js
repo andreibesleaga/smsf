@@ -104,6 +104,7 @@ describe('Student Management API', () => {
     test('GET /api/v1/students - List all students', async () => {
         const res = await agent
             .get('/api/v1/students')
+            .query({ name: newStudent.name, limit: 100 })
             .set('x-csrf-token', csrfToken);
 
         if (res.statusCode !== 200) {
@@ -111,10 +112,11 @@ describe('Student Management API', () => {
         }
 
         expect(res.statusCode).toBe(200);
-        expect(res.body.students).toBeInstanceOf(Array);
+        expect(res.body.data).toBeInstanceOf(Array);
+        expect(res.body.meta).toBeDefined();
 
         // Find our student
-        const student = res.body.students.find(s => s.email === newStudent.email);
+        const student = res.body.data.find(s => s.email === newStudent.email);
         if (!student) {
             console.log('Students List:', JSON.stringify(res.body.students, null, 2));
         }
