@@ -98,8 +98,6 @@ describe('Student Management API', () => {
         expect(res.statusCode).toBe(200);
         expect(res.body.message).toBeDefined();
         // Depending on service implementation, it might not return the ID directly in body if not modified to do so.
-        // But let's check if we can fetch it. 
-        // Actually the service returns `{ message: ... }`.
         // To verify creation we should query by email or list all.
     });
 
@@ -110,7 +108,6 @@ describe('Student Management API', () => {
 
         if (res.statusCode !== 200) {
             // Keep error logging for future failures if needed, or remove. 
-            // I'll keep the failure logs but remove "DEBUG" ones.
         }
 
         expect(res.statusCode).toBe(200);
@@ -174,4 +171,3 @@ describe('Student Management API', () => {
         expect(checkRes.body.systemAccess).toBe(false);
     });
 });
-
